@@ -35,14 +35,10 @@ $(function (){
     var data = [];
     var data2 = [];
     var cookies = document.cookie;
-
     cookies = cookies.replace(/=/g, " ");
     cookies = cookies.replace(/;/g, "");
-    console.log(cookies);
     cookies = cookies.split(" ");
-    console.log(cookies.length);
-
-
+    
     var i;
     for(i = 0; i < cookies.length; i=i+2){
         data.push(cookies[i]);
@@ -51,6 +47,7 @@ $(function (){
     for(j = 1; j < cookies.length; j=j+2){
         data2.push(cookies[j]);
     }
+    console.log(data.length);
     $("#search-input").autocomplete({
         source: data,
         minLength: 0
@@ -59,12 +56,20 @@ $(function (){
         source: data2,
         minLength: 0
     });
-    $("#search-input").click(function(){
-        $("#search-input").autocomplete( "search", "" );
+    $("#search-input").click(function(e){
+        if(cookies.length > 1){
+            $("#search-input").autocomplete( "search", "" );
+        }else{
+            e.preventDefault();
+        }
     });
-    $("#keyword-input").click(function(){
-        $("#keyword-input").autocomplete( "search", "" );
-    });
+    $("#keyword-input").click(function(e){
+        if(cookies.length > 1){
+            $("#keyword-input").autocomplete( "search", "" );
+        }else{
+            e.preventDefault();
+        }
+    }); 
 });
 
 function createLimitDDitem(len) {
