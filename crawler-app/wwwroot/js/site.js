@@ -52,10 +52,18 @@ $(function (){
         data2.push(cookies[j]);
     }
     $("#search-input").autocomplete({
-        source: data
+        source: data,
+        minLength: 0
     });
     $("#keyword-input").autocomplete({
-        source: data2
+        source: data2,
+        minLength: 0
+    });
+    $("#search-input").click(function(){
+        $("#search-input").autocomplete( "search", "" );
+    });
+    $("#keyword-input").click(function(){
+        $("#keyword-input").autocomplete( "search", "" );
     });
 });
 
