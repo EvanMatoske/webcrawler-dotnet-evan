@@ -1,0 +1,102 @@
+﻿@page
+@model crawler_app.Pages.ResultsModel
+@{
+    ViewData["Title"] = "Results";
+
+}
+<script src="~/js/d3_tree.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    var apiURL = "https://midyear-reactor-199918.appspot.com/crawl";
+    var method = '@Model.results.CrawlMethod.ToLower()' == "depth-first" ? "DFS" : "BFS";
+    var keyword = '@Model.results.Keyword' == "" ? null : '@Model.results.Keyword';
+    var postData = {
+        "startURL": '@Model.results.URL',
+        "method": method,
+        "limit": parseInt('@Model.results.Limit'),
+        "maxSeconds": 10,
+        "keyword": keyword
+    };
+    //console.log(postData);
+    
+    var request = $.ajax({
+        method: "POST",
+        url: apiURL,
+        data: postData,
+        cache: true,
+        dataType: "json"
+    });
+
+    request.done(function (data) {
+        var treeData;
+        var childrenLength;
+        if (method == "DFS") {
+            treeData = [data.pages];
+        } else {
+            treeData = [data];
+        }
+        childrenLength = treeData[0].children.length;
+        createD3_tree(treeData, childrenLength);
+        //data.keywordFound -- bool
+        //data.keywordLocation -- string (url)
+    });
+
+    request.fail(function (jqXHR, textStatus) {
+        $("#url").text("Request failed: " + textStatus);
+        console.log("Request failed: " + textStatus);
+    });
+
+</script>
+<style>
+
+    .node {
+        cursor: pointer;
+    }
+
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 3px;
+        }
+
+        .node text {
+            font: 12px sans-serif;
+        }
+
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 2px;
+    }
+</style>
+
+
+<div id="results" class="container col-xs-1 text-left" style="max-width:none; width:100%;">
+    <h1>Results</h1>
+    <div id="search-info">
+        <h3 id="url">@Model.results.URL</h3>
+        <h3 id="method"></h3>
+    </div>
+    <div id="tree" style="overflow:scroll; width: 100%;">
+
+    </div>
+</div>
+
+
+<!-- Bootstrap modal dialog -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">More info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 id="modal-title"></h2>
+                <a id="modal-url" href="#" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+</div>
+

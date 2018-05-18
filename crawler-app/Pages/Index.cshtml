@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+<div id="home" class="container col-xs-1 text-center">
+    <h1>Crawlerfy</h1>
+    <div id="default-search-ctn">
+        <h4>default search</h4>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" defaultChecked /> On
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off" /> Off
+            </label>
+        </div>
+    </div>
+     
+    <input id="search-input" class="full-input" type="text" placeholder="search"/>
+        <br />
+        <input id="keyword-input" class="full-input" type="text" placeholder="keyword (optional)" />
+        <br />
+        
+        <div id="crawl-ctn" class="dropdown">
+            <button id="crawl-dropdownMenuButton" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" data-selected="" aria-haspopup="true" aria-expanded="false">
+                Crawl method
+            </button>
+            <div id="crawl-dd-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" data-value="DFS">Depth-first</a>
+                <a class="dropdown-item" href="#" data-value="BFS">Breadth-first</a>
+            </div>
+        </div>
+        <div id="limit-ctn" class="dropdown">
+            <button id="limit-dropdownMenuButton" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" data-selected="" aria-haspopup="true" aria-expanded="false">Limit</button>
+            <div id="limit-dd-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">1</a>
+                <a class="dropdown-item" href="#">2</a>
+                <a class="dropdown-item" href="#">3</a>
+                <a class="dropdown-item" href="#">4</a>
+                <a class="dropdown-item" href="#">5</a>
+            </div>
+        </div>
+        <button id="search-btn" type="button" class="btn btn-primary btn-lg btn-block">Start ></button>
+    
+</div>

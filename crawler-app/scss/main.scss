@@ -1,0 +1,87 @@
+﻿/* main */
+$var: #fff;
+
+body {
+    background: $var;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    .container {
+        margin-top: 10%;
+        margin-bottom: 100px;
+    }
+}
+
+/* Index (home) */
+$max-width: 500px;
+
+#home {
+    h1 {
+        color: #5558AF;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 64px;
+    }
+
+    #default-search-ctn {
+        margin-top: 20px;
+
+        h4 {
+            font-size: 18px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    }
+
+    input {
+        border: 2px solid #9A9A9A;
+        border-radius: 5px;
+        padding: 10px;
+
+        &.full-input {
+            margin-top: 20px;
+            width: 500px;
+        }
+    }
+
+    .dropdown {
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    #crawl-dropdownMenuButton {
+        margin-right: 15px;
+        width: 300px;
+    }
+
+    #limit-dropdownMenuButton {
+        width: 185px;
+    }
+
+    #search-btn {
+        max-width: 500px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* tree styles */
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
+
+.node text {
+    font: 12px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}

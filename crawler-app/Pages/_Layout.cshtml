@@ -1,0 +1,48 @@
+﻿@{
+    var rv = ViewContext.RouteData.Values;
+    string page = $"{rv["page"]}".ToLowerInvariant();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - crawler_app</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/main.css" />
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css">
+
+
+    @*// add d3 dependency only on results page*@
+    @if (page == "/results")
+    {
+        <script src="//d3js.org/d3.v3.min.js"></script>
+    }
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a href="/" class="nav-item nav-link @(page == "/index" ?  "active" : "")">Home <span class="sr-only">(current)</span></a>
+                <a href="/about" class="nav-item nav-link @(page == "/about" ?  "active" : "")">About</a>
+                <a href="/results" class="nav-item nav-link @(page == "/results" ?  "active" : "")">Results</a>
+            </div>
+        </div>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
